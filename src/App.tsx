@@ -20,7 +20,10 @@ function App() {
 
   function handleSearch(username: string) {
     const filteredUser = users.filter((user) =>
-      user.name.toLowerCase().trim().includes(username.toLowerCase().trim()),
+      user.username
+        .toLowerCase()
+        .trim()
+        .includes(username.toLowerCase().trim()),
     );
     setFilteredList(filteredUser);
   }
