@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+
+  --color-black: #0a0a0f;
+  --color-surface: #13131a;
+  --color-card: #1c1c26;
+  --color-border: #2a2a3a;
+  --color-accent: #6ee7b7;
+  --color-accentDim: #1a3a30;
+  --color-white: #f0f0f5;
+  --color-muted: #7070a0;
+  --color-error: #ff6b6b;
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-JetBrains: "JetBrains Mono", monospace;
+  --font-display: "DM Serif Display", serif;
+
+  --grid-template-columns-cards: repeat(auto-fill, minmax(260px, 1fr));
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  --animate-fadeUp: fadeUp 0.5s ease both;
+}
