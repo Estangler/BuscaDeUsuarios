@@ -4,6 +4,7 @@ import SearchInput from "./components/SearchInput";
 import ErrorMessage from "./components/ErrorMessage";
 import EmptyState from "./components/EmptyState";
 import UserCard from "./components/UserCard";
+import CardContainer from "./components/CardContainer";
 
 function App() {
   const { users, isLoading } = useUsers();
@@ -14,7 +15,7 @@ function App() {
       <Header />
       <div className="space-y-10">
         <SearchInput />
-        <UserCard />
+        <CardContainer />
       </div>
     </main>
   );
