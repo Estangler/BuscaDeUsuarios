@@ -11,7 +11,7 @@ export default function SearchInput({
 }: SearchInputProps) {
   const [search, setSearch] = useState("");
 
-  function handleInput(
+  function handleSearchInput(
     e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
   ) {
     const inputValue = e.target.value;
@@ -27,7 +27,7 @@ export default function SearchInput({
         </span>
         <input
           value={search}
-          onChange={handleInput}
+          onChange={handleSearchInput}
           type="text"
           id="search-user"
           placeholder="Search for username"

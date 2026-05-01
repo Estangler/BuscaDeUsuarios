@@ -18,7 +18,7 @@ export type UserCardProps = {
 
 export default function UserCard({ user }: UserCardProps) {
   return (
-    <div className="bg-card min-w-60 border mx-auto border-border rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 animate-fadeUp relative before:absolute before:top-0 before:left-0 before:right-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300">
+    <div className="bg-card min-w-60 border mx-auto border-border rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 animate-fadeUp relative before:absolute before:top-0 before:left-0 before:right-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-accent before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 inset-shadow-sm inset-shadow-black">
       <div className="flex flex-col items-start gap-2">
         <p className="uppercase font-display bg-accentDim text-accent w-11 h-11 flex items-center justify-center rounded-lg">
           {user.name[0]}
