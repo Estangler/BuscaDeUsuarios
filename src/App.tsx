@@ -25,16 +25,20 @@ function App() {
         .trim()
         .includes(username.toLowerCase().trim()),
     );
+
     setFilteredList(filteredUser);
   }
 
-  console.log(isLoading, error);
   return (
     <main className="mx-auto md:max-w-215">
       <Header />
       <div className="space-y-10">
         <SearchInput setUsername={handleSearch} />
-        <CardContainer userList={filteredList} />
+        {filteredList.length <= 0 ? (
+          <EmptyState />
+        ) : (
+          <CardContainer userList={filteredList} />
+        )}
       </div>
     </main>
   );
