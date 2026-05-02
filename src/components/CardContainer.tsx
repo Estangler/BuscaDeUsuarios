@@ -1,6 +1,5 @@
 import UserCard from "./UserCard";
 import { type User } from "../types/user";
-
 export type CardContainerProps = {
   userList: User[];
 };
