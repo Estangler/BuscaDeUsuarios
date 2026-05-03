@@ -9,6 +9,7 @@ import { type User } from "./types/user";
 
 function App() {
   const [filteredList, setFilteredList] = useState<User[]>([]);
+
   const { users, isLoading, error } = useUsers();
 
   useEffect(() => {
@@ -29,17 +30,41 @@ function App() {
     setFilteredList(filteredUser);
   }
 
+  function handleEmptyState() {
+    handleSearch("");
+  }
+
+  function handleOrdenate(value: string) {
+    const orderedUsers = [...filteredList].sort((a, b) => {
+      if (value === "az") {
+        return a.name.localeCompare(b.name);
+      }
+
+      return b.name.localeCompare(a.name);
+    });
+
+    setFilteredList(orderedUsers);
+  }
+
+  if (isLoading) {
+    return <p>Loading data...</p>;
+  }
+
   return (
     <main className="mx-auto md:max-w-215">
       <Header />
-      <div className="space-y-10">
-        <SearchInput setUsername={handleSearch} />
-        {filteredList.length <= 0 ? (
-          <EmptyState />
-        ) : (
-          <CardContainer userList={filteredList} />
-        )}
-      </div>
+      {error ? (
+        <ErrorMessage />
+      ) : (
+        <div className="space-y-10">
+          <SearchInput setUsername={handleSearch} ordenat={handleOrdenate} />
+          {filteredList.length === 0 ? (
+            <EmptyState clearSearch={handleEmptyState} />
+          ) : (
+            <CardContainer userList={filteredList} />
+          )}
+        </div>
+      )}
     </main>
   );
 }

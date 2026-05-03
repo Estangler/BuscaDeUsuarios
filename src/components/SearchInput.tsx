@@ -3,13 +3,16 @@ import { useState } from "react";
 
 type SearchInputProps = React.ComponentProps<"input"> & {
   setUsername: (username: string) => void;
+  ordenat: (t: string) => void;
 };
 
 export default function SearchInput({
   setUsername,
+  ordenat,
   ...rest
 }: SearchInputProps) {
   const [search, setSearch] = useState("");
+  const [ordenate, setOrdenate] = useState("");
 
   function handleSearchInput(
     e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
@@ -17,6 +20,14 @@ export default function SearchInput({
     const inputValue = e.target.value;
     setSearch(inputValue);
     setUsername(inputValue);
+  }
+
+  function handleOrdenate(
+    e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>,
+  ) {
+    const selectValue = e.target.value;
+    setOrdenate(selectValue);
+    ordenat(selectValue);
   }
 
   return (
@@ -36,7 +47,14 @@ export default function SearchInput({
           {...rest}
         />
       </label>
-      <select className="border border-border rounded-lg py-3 px-4 bg-surface focus:border-accent cursor-pointer inset-shadow-sm inset-shadow-black hover:border-accentDim outline-none transition duration-300 ease-linear focus:ring-2 focus:ring-muted">
+      <select
+        className="border border-border rounded-lg py-3 px-4 bg-surface focus:border-accent cursor-pointer inset-shadow-sm inset-shadow-black hover:border-accentDim outline-none transition duration-300 ease-linear focus:ring-2 focus:ring-muted"
+        value={ordenate}
+        onChange={handleOrdenate}
+      >
+        <option value="" disabled>
+          select
+        </option>
         <option value="az">A {String.fromCodePoint(0x2192)} Z</option>
         <option value="za">Z {String.fromCodePoint(0x2192)} A</option>
       </select>
