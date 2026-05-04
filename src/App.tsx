@@ -24,7 +24,11 @@ function App() {
           return a.name.localeCompare(b.name);
         }
 
-        return b.name.localeCompare(a.name);
+        if (select === "za") {
+          return b.name.localeCompare(a.name);
+        }
+
+        return 0;
       });
   }, [users, select, debouncedSearch]);
 
