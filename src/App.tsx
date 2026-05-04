@@ -4,24 +4,29 @@ import InputWrapper from "./components/InputWrapper";
 import ErrorMessage from "./components/ErrorMessage";
 import EmptyState from "./components/EmptyState";
 import CardContainer from "./components/CardContainer";
-import { useState } from "react";
+import { useDebounce } from "./hooks/useDebounce";
+import { useMemo, useState } from "react";
 import { Loader } from "lucide-react";
 
 function App() {
   const { users, isLoading, error } = useUsers();
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("");
-  const filteredList = [...users]
-    .filter((user) =>
-      user.username.toLowerCase().includes(search.toLowerCase()),
-    )
-    .sort((a, b) => {
-      if (select === "az") {
-        return a.name.localeCompare(b.name);
-      }
+  const debouncedSearch = useDebounce(search);
 
-      return b.name.localeCompare(a.name);
-    });
+  const filteredUsers = useMemo(() => {
+    return [...users]
+      .filter((user) =>
+        user.username.toLowerCase().includes(debouncedSearch.toLowerCase()),
+      )
+      .sort((a, b) => {
+        if (select === "az") {
+          return a.name.localeCompare(b.name);
+        }
+
+        return b.name.localeCompare(a.name);
+      });
+  }, [users, select, debouncedSearch]);
 
   function resetSearch() {
     setSearch("");
@@ -45,10 +50,10 @@ function App() {
             onSelect={setSelect}
             selectValue={select}
           />
-          {filteredList.length === 0 ? (
+          {filteredUsers.length === 0 ? (
             <EmptyState onClick={resetSearch} />
           ) : (
-            <CardContainer userList={filteredList} />
+            <CardContainer userList={filteredUsers} />
           )}
         </div>
       )}
