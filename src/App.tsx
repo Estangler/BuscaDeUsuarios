@@ -8,10 +8,25 @@ import { useState } from "react";
 import { Loader } from "lucide-react";
 
 function App() {
+  const { users, isLoading, error } = useUsers();
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("");
+  const filteredList = [...users]
+    .filter((user) =>
+      user.username.toLowerCase().includes(search.toLowerCase()),
+    )
+    .sort((a, b) => {
+      if (select === "az") {
+        return a.name.localeCompare(b.name);
+      }
 
-  const { users, isLoading, error } = useUsers();
+      return b.name.localeCompare(a.name);
+    });
+
+  function resetSearch() {
+    setSearch("");
+    setSelect("");
+  }
 
   if (isLoading) {
     return <Loader className="animate-spin" />;
@@ -25,15 +40,15 @@ function App() {
       ) : (
         <div className="space-y-10">
           <InputWrapper
-            onSearch={setSelect}
+            onSearch={setSearch}
             searchValue={search}
-            onSelect={setSearch}
+            onSelect={setSelect}
             selectValue={select}
           />
-          {users.length === 0 ? (
-            <EmptyState />
+          {filteredList.length === 0 ? (
+            <EmptyState onClick={resetSearch} />
           ) : (
-            <CardContainer userList={users} />
+            <CardContainer userList={filteredList} />
           )}
         </div>
       )}
