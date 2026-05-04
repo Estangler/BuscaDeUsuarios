@@ -2,6 +2,11 @@
 
 Uma aplicação React para busca, filtragem e ordenação de usuários utilizando dados da API pública JSONPlaceholder.
 
+
+<img width="1900" height="972" alt="image" src="https://github.com/user-attachments/assets/e092723c-1107-4673-8b24-17ea942fb4c3" />
+
+
+
 O projeto foi desenvolvido com foco em:
 
 - Componentização
